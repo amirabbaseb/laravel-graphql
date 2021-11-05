@@ -1,7 +1,8 @@
 <?php
 
-namespace App\graphql\Mutations;
+namespace App\graphql\Mutations\Item;
 
+use App\Http\Controllers\ItemController;
 use App\Models\Item;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Mutation;
@@ -32,8 +33,9 @@ class DeleteItemMutation extends Mutation
 
     public function resolve($root, $args)
     {
-        $book = Item::query()->findOrFail($args['id']);
+//        $item = Item::query()->findOrFail($args['id']);
+//        return $item->delete() ? true : false;
 
-        return $book->delete() ? true : false;
+        return (new ItemController())->delete($args);
     }
 }

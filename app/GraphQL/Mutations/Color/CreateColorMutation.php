@@ -1,7 +1,8 @@
 <?php
 
-namespace App\GraphQL\Mutations;
+namespace App\GraphQL\Mutations\Color;
 
+use App\Http\Controllers\ColorController;
 use App\Models\Color;
 use Rebing\GraphQL\Support\Mutation;
 use GraphQL\Type\Definition\Type;
@@ -34,10 +35,11 @@ class CreateColorMutation extends Mutation
 
     public function resolve($root, $args)
     {
-        $item = new Color();
-        $item->fill($args);
-        $item->save();
-
-        return $item;
+//        $item = new Color();
+//        $item->fill($args);
+//        $item->save();
+//
+//        return $item;
+        return (new ColorController())->store($args);
     }
 }

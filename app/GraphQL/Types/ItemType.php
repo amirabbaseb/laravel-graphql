@@ -31,6 +31,10 @@ class ItemType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The brand name of the item',
             ],
+            'price' => [
+                'type' => Type::string(),
+                'description' => 'The price of the item',
+            ],
         ];
     }
 }

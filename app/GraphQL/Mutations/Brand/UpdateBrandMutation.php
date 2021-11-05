@@ -1,13 +1,14 @@
 <?php
 
-namespace App\graphql\Mutations;
+namespace App\graphql\Mutations\Brand;
 
-use App\Models\Color;
+use App\Http\Controllers\BrandController;
+use App\Models\Brand;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Mutation;
 
-class UpdateColorMutation extends Mutation
+class UpdateBrandMutation extends Mutation
 {
     protected $attributes = [
         'name' => 'updateBrand'
@@ -15,7 +16,7 @@ class UpdateColorMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('Color');
+        return GraphQL::type('Brand');
     }
 
     public function args(): array
@@ -28,20 +29,12 @@ class UpdateColorMutation extends Mutation
             'name' => [
                 'name' => 'name',
                 'type' =>  Type::string(),
-            ],
-            'hex_code' => [
-                'name' => 'hex_code',
-                'type' =>  Type::string(),
             ]
         ];
     }
 
     public function resolve($root, $args)
     {
-        $color = Color::query()->findOrFail($args['id']);
-        $color->fill($args);
-        $color->save();
-
-        return $color;
+        return (new BrandController())->update($args);
     }
 }

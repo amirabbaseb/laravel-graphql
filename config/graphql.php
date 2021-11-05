@@ -107,16 +107,18 @@ return [
                 'color' => \App\GraphQL\Queries\ColorQuery::class,
             ],
             'mutation' => [
-                'createItem' => \App\GraphQL\Mutations\CreateItemMutation::class,
-                'deleteItem' => \App\GraphQL\Mutations\DeleteItemMutation::class,
-                'updateItem' => \App\GraphQL\Mutations\UpdateItemMutation::class,
-                'createBrand' => \App\GraphQL\Mutations\CreateBrandMutation::class,
-                'deleteBrand' => \App\GraphQL\Mutations\DeleteBrandMutation::class,
-                'updateBrand' => \App\GraphQl\Mutations\UpdateBrandMutation::class,
-                'createColor' => \App\GraphQl\Mutations\CreateColorMutation::class,
-                'deleteColor' => \App\GraphQL\Mutations\DeleteColorMutation::class,
-                'updateColor' => \App\GraphQL\Mutations\UpdateColorMutation::class,
-                // ExampleMutation::class,
+                // Item
+                'createItem' => \App\graphql\Mutations\Item\CreateItemMutation::class,
+                'deleteItem' => \App\graphql\Mutations\Item\DeleteItemMutation::class,
+                'updateItem' => \App\graphql\Mutations\Item\UpdateItemMutation::class,
+                // Brand
+                'createBrand' => \App\GraphQL\Mutations\Brand\CreateBrandMutation::class,
+                'deleteBrand' => \App\graphql\Mutations\Brand\DeleteBrandMutation::class,
+                'updateBrand' => \App\graphql\Mutations\Brand\UpdateBrandMutation::class,
+                // Color
+                'createColor' => \App\GraphQL\Mutations\Color\CreateColorMutation::class,
+                'deleteColor' => \App\GraphQL\Mutations\Brand\DeleteBrandMutation::class,
+                'updateColor' => \App\graphql\Mutations\Brand\UpdateBrandMutation::class,
             ],
             'middleware' => [],
             'method' => ['get', 'post'],
@@ -135,7 +137,8 @@ return [
     'types' => [
         'Item' => App\GraphQL\Types\ItemType::class,
         'Color' => App\GraphQL\Types\ColorType::class,
-        'Brand' => App\GraphQl\Types\BrandType::class
+        'Brand' => App\GraphQl\Types\BrandType::class,
+        'ItemInput' => \App\GraphQL\Inputs\ItemInput::class
         // ExampleType::class,
         // ExampleRelationType::class,
         // \Rebing\GraphQL\Support\UploadType::class,

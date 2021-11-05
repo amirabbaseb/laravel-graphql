@@ -10,4 +10,9 @@ class Color extends Model
     protected $fillable = [
         'name',
         'hex_code'
-    ];}
+    ];
+
+    public function items(){
+        return $this->belongsToMany(Items::class);
+    }
+}

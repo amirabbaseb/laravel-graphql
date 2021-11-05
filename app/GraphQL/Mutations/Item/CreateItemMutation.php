@@ -1,16 +1,17 @@
 <?php
 
-namespace App\graphql\Mutations;
+namespace App\graphql\Mutations\Item;
 
 use App\Models\Item;
-use Rebing\GraphQL\Support\Facades\GraphQL;
-use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Mutation;
+use GraphQL\Type\Definition\Type;
+use Rebing\GraphQL\Support\Facades\GraphQL;
+use App\Http\Controllers\ItemController;
 
-class UpdateItemMutation extends Mutation
+class CreateItemMutation extends Mutation
 {
     protected $attributes = [
-        'name' => 'updateItem'
+        'name' => 'createItem'
     ];
 
     public function type(): Type
@@ -21,10 +22,6 @@ class UpdateItemMutation extends Mutation
     public function args(): array
     {
         return [
-            'id' => [
-                'name' => 'id',
-                'type' =>  Type::int(),
-            ],
             'name' => [
                 'name' => 'name',
                 'type' =>  Type::string(),
@@ -33,15 +30,21 @@ class UpdateItemMutation extends Mutation
                 'name' => 'brand_id',
                 'type' =>  Type::string(),
             ],
+            'price' => [
+                'name' => 'price',
+                'type' =>  Type::string(),
+            ]
+
         ];
     }
 
     public function resolve($root, $args)
     {
-        $book = Item::query()->findOrFail($args['id']);
-        $book->fill($args);
-        $book->save();
-
-        return $book;
+//        $item = new Item();
+//        $item->fill($args);
+//        $item->save();
+//
+//        return $item;
+        return (new ItemController())->store($args);
     }
 }

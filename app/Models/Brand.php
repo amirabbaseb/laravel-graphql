@@ -10,4 +10,8 @@ class Brand extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function items(){
+        return $this->hasMany(Items::class);
+    }
 }

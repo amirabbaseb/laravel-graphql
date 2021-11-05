@@ -1,7 +1,8 @@
 <?php
 
-namespace App\GraphQL\Mutations;
+namespace App\GraphQL\Mutations\Brand;
 
+use App\Http\Controllers\BrandController;
 use App\Models\Brand;
 use Rebing\GraphQL\Support\Mutation;
 use GraphQL\Type\Definition\Type;
@@ -30,10 +31,11 @@ class CreateBrandMutation extends Mutation
 
     public function resolve($root, $args)
     {
-        $item = new Brand();
-        $item->fill($args);
-        $item->save();
-
-        return $item;
+//        $item = new Brand();
+//        $item->fill($args);
+//        $item->save();
+//
+//        return $item;
+        return (new BrandController())->store($args);
     }
 }

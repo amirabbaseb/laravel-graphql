@@ -1,16 +1,17 @@
 <?php
 
-namespace App\graphql\Mutations;
+namespace App\graphql\Mutations\Color;
 
-use App\Models\Brand;
+use App\Http\Controllers\ColorController;
+use App\Models\Color;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Mutation;
 
-class DeleteBrandMutation extends Mutation
+class DeleteColorMutation extends Mutation
 {
     protected $attributes = [
-        'name' => 'deleteBrand',
-        'description' => 'Delete a brand'
+        'name' => 'deleteColor',
+        'description' => 'Delete a color'
     ];
 
     public function type(): Type
@@ -32,8 +33,9 @@ class DeleteBrandMutation extends Mutation
 
     public function resolve($root, $args)
     {
-        $brand = Brand::query()->findOrFail($args['id']);
-
-        return $brand->delete() ? true : false;
+//        $color = Color::query()->findOrFail($args['id']);
+//
+//        return $color->delete() ? true : false;
+        return (new ColorController())->delete($args);
     }
 }
