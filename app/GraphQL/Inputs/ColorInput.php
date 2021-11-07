@@ -17,7 +17,7 @@ class ColorInput extends InputType
     public function fields(): array
     {
         return [
-            'id' => [
+            'color_id' => [
                 'type' => Type::int(),
                 'description' => 'A test field',
             ],
@@ -29,6 +29,10 @@ class ColorInput extends InputType
                 'type' => Type::string(),
                 'description' => 'A test field',
             ],
+            'price' => [
+                'type' => Type::string(),
+                'description' => 'A test field',
+            ]
         ];
     }
 }

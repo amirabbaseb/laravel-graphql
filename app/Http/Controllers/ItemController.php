@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ItemRequest;
+use App\Models\ItemColor;
 use Illuminate\Http\Request;
 use App\Models\Item;
 
@@ -23,6 +24,10 @@ class ItemController extends Controller
         $this->validator($args);
 
         $item_query = Item::query()->create($args);
+
+        foreach ($args['color_input'] as $key => $value) {
+            $add_to_itemColor = ItemColor::query()->create($args['color_input']);
+        }
 
         return "created";
     }

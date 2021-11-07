@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateItemsColors extends Migration
+class CreateItemColorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateItemsColors extends Migration
      */
     public function up()
     {
-        Schema::create('color_item', function (Blueprint $table) {
+        Schema::create('item_colors', function (Blueprint $table) {
             $table->id();
-            $table->double('price');
+            $table->double('price')->nullable();
             $table->unsignedBigInteger('color_id');
             $table->foreign('color_id')->references('id')->on('colors');
             $table->unsignedBigInteger('item_id');
@@ -31,6 +31,8 @@ class CreateItemsColors extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('color_item');
+        Schema::dropIfExists('item_colors');
     }
 }
+
+

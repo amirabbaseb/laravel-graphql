@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\GraphQL\Inputs;
 
+use Rebing\GraphQL\Support\Facades\GraphQL;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\InputType;
 
@@ -32,6 +33,9 @@ class ItemInput extends InputType
             'brand_id' => [
                 'type' => Type::int(),
                 'description' => 'A test field',
+            ],
+            'color_input' => [
+                'type' => Type::listOf(GraphQL::type('ColorInput'))
             ]
         ];
     }
