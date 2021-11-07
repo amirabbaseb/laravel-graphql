@@ -1,7 +1,8 @@
 <?php
 
-namespace App\graphql\Mutations\Item;
+namespace App\GraphQL\Mutations\Item;
 
+use App\Http\Requests\ItemRequest;
 use App\Models\Item;
 use Rebing\GraphQL\Support\Mutation;
 use GraphQL\Type\Definition\Type;
@@ -16,25 +17,28 @@ class CreateItemMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('Item');
+        return Type::string();
     }
 
     public function args(): array
     {
         return [
-            'name' => [
-                'name' => 'name',
-                'type' =>  Type::string(),
-            ],
-            'brand_id' => [
-                'name' => 'brand_id',
-                'type' =>  Type::string(),
-            ],
-            'price' => [
-                'name' => 'price',
-                'type' =>  Type::string(),
+//            'name' => [
+//                'name' => 'name',
+//                'type' =>  Type::string(),
+//            ],
+//            'brand_id' => [
+//                'name' => 'brand_id',
+//                'type' =>  Type::string(),
+//            ],
+//            'price' => [
+//                'name' => 'price',
+//                'type' =>  Type::string(),
+//            ]
+            'input' => [
+                'name' => 'input',
+                'type' => GraphQL::type('ItemInput')
             ]
-
         ];
     }
 
@@ -45,6 +49,6 @@ class CreateItemMutation extends Mutation
 //        $item->save();
 //
 //        return $item;
-        return (new ItemController())->store($args);
+        return (new ItemController())->store($args['input'], ItemRequest::class);
     }
 }

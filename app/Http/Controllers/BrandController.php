@@ -13,7 +13,7 @@ class BrandController extends Controller
         $item->fill($args);
         $item->save();
 
-        return $item;
+        return "created";
     }
 
     public function update($args)

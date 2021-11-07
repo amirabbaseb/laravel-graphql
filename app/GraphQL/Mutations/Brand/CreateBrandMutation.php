@@ -16,7 +16,7 @@ class CreateBrandMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('Brand');
+        return Type::string();
     }
 
     public function args(): array

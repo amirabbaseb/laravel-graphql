@@ -15,6 +15,7 @@ class CreateItemsColors extends Migration
     {
         Schema::create('color_item', function (Blueprint $table) {
             $table->id();
+            $table->double('price');
             $table->unsignedBigInteger('color_id');
             $table->foreign('color_id')->references('id')->on('colors');
             $table->unsignedBigInteger('item_id');

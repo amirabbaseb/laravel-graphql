@@ -20,17 +20,14 @@ class ItemInput extends InputType
             'name' => [
                 'type' => Type::string(),
                 'description' => 'A test field',
-                'alias' => 'name',
             ],
             'price' => [
                 'type' => Type::string(),
                 'description' => 'A test field',
-                'alias' => 'price',
             ],
-            'brand' => [
-                'type' => Type::string(),
+            'brand_id' => [
+                'type' => Type::int(),
                 'description' => 'A test field',
-                'alias' => 'brand_id'
             ]
         ];
     }
