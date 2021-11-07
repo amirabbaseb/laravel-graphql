@@ -1,11 +1,13 @@
 <?php
 
-namespace App\graphql\Mutations\Item;
+namespace App\GraphQL\Mutations\Item;
 
 use App\Http\Controllers\ItemController;
 use App\Models\Item;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Mutation;
+use Rebing\GraphQL\Support\Facades\GraphQL;
+
 
 class DeleteItemMutation extends Mutation
 {
@@ -16,26 +18,22 @@ class DeleteItemMutation extends Mutation
 
     public function type(): Type
     {
-        return Type::boolean();
+        return Type::string();
     }
 
 
     public function args(): array
     {
         return [
-            'id' => [
-                'name' => 'id',
-                'type' => Type::int(),
-                'rules' => ['required']
+            'input' => [
+                'name' => 'input',
+                'type' => GraphQL::type('ItemInput')
             ]
         ];
     }
 
     public function resolve($root, $args)
     {
-//        $item = Item::query()->findOrFail($args['id']);
-//        return $item->delete() ? true : false;
-
-        return (new ItemController())->delete($args);
+        return (new ItemController())->delete($args['input']);
     }
 }

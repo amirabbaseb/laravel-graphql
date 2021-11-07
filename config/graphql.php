@@ -117,8 +117,8 @@ return [
                 'updateBrand' => \App\graphql\Mutations\Brand\UpdateBrandMutation::class,
                 // Color
                 'createColor' => \App\GraphQL\Mutations\Color\CreateColorMutation::class,
-                'deleteColor' => \App\GraphQL\Mutations\Brand\DeleteBrandMutation::class,
-                'updateColor' => \App\graphql\Mutations\Brand\UpdateBrandMutation::class,
+                'deleteColor' => \App\GraphQL\Mutations\Color\DeleteColorMutation::class,
+                'updateColor' => \App\GraphQL\Mutations\Color\UpdateColorMutation::class,
             ],
             'middleware' => [],
             'method' => ['get', 'post'],
@@ -138,7 +138,8 @@ return [
         'Item' => App\GraphQL\Types\ItemType::class,
         'Color' => App\GraphQL\Types\ColorType::class,
         'Brand' => App\GraphQl\Types\BrandType::class,
-        'ItemInput' => \App\GraphQL\Inputs\ItemInput::class
+        'ItemInput' => \App\GraphQL\Inputs\ItemInput::class,
+        'ColorInput' => \App\GraphQL\Inputs\ColorInput::class
         // ExampleType::class,
         // ExampleRelationType::class,
         // \Rebing\GraphQL\Support\UploadType::class,

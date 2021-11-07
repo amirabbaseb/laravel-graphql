@@ -16,39 +16,21 @@ class UpdateColorMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('Color');
+        return Type::string();
     }
 
     public function args(): array
     {
         return [
-            'id' => [
-                'name' => 'id',
-                'type' => Type::int(),
-            ],
-            'name' => [
-                'name' => 'name',
-                'type' => Type::string(),
-            ],
-            'hex_code' => [
-                'name' => 'hex_code',
-                'type' => Type::string(),
+            'input' => [
+                'name' => 'input',
+                'type' => GraphQL::type('ColorInput')
             ]
         ];
     }
 
     public function resolve($root, $args)
     {
-//        $color = Color::query()->where('id', '=', $args['id']);
-//        if ($color->exists()) {
-//            return $color->first();
-//        }
-//
-////        $color = Color::query()->findOrFail($args['id']);
-//        $color->fill($args);
-//
-//
-//        return $color;
-        return (new ColorController())->update($args);
+        return (new ColorController())->update($args['input']);
     }
 }

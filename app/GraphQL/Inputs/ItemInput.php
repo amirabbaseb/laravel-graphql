@@ -17,6 +17,10 @@ class ItemInput extends InputType
     public function fields(): array
     {
         return [
+            'id' => [
+                'type' => Type::int(),
+                'description' => 'A test field',
+            ],
             'name' => [
                 'type' => Type::string(),
                 'description' => 'A test field',

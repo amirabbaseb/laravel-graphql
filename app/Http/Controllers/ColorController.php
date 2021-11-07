@@ -7,34 +7,47 @@ use Illuminate\Http\Request;
 
 class ColorController extends Controller
 {
-    public function store($args) {
-        $item = new Color();
-        $item->fill($args);
-        $item->save();
+    private function validator($args)
+    {
+        $rules = [
+            'name' => ['required'],
+            'hex_code' => ['required'],
+            'id' => ['numeric']
+        ];
 
-        return $item;
+        $this->general_validation($rules, $args);
+    }
+
+    public function store($args)
+    {
+        $this->validator($args);
+
+        $color_query = Color::query()->create($args);
+
+        return 'created';
     }
 
     public function update($args)
     {
-        $color_quey = Color::query()->where('id', '=', $args['id']);
-        if ($color_quey->exists()){
-            return $color_quey->first();
-        }
+        $this->validator($args);
 
-        $color_quey->fill($args);
-        $color_quey->save();
+        $color_query = Color::query()->find($args['id']);
+        $color_query->update($args);
 
-        return $color_quey;
+        return "updated";
     }
 
     public function delete($args)
     {
-        $color_quey = Color::query()->where('id', '=', $args['id']);
-        if ($color_quey->exists()) {
-            return $color_quey->first();
-        }
+        $rules = [
+            'id' => ['required'],
+        ];
 
-        return $color_quey->delete() ? true : false;
+        $this->general_validation($rules, $args);
+
+        $color_query = Color::query()->find($args['id']);
+        $color_query->delete();
+
+        return "deleted";
     }
 }

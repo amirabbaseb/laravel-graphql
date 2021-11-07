@@ -8,42 +8,46 @@ use App\Models\Item;
 
 class ItemController extends Controller
 {
-    public function store($args)
+    private function validator($args)
     {
         $rules = [
-          'name' => ['required'],
-          'brand_id' => ['required']
+            'name' => ['required'],
+            'brand_id' => ['required']
         ];
 
         $this->general_validation($rules, $args);
+    }
 
-        $item = new Item();
-        $item->fill($args);
-        $item->save();
+    public function store($args)
+    {
+        $this->validator($args);
+
+        $item_query = Item::query()->create($args);
 
         return "created";
     }
 
     public function update($args)
     {
-        $item_query = Item::query()->where('id', '=', $args['id']);
-        if ($item_query->exists()) {
-            return $item_query->first();
-        }
+        $this->validator($args);
 
-        $item_query->fill($args);
-        $item_query->save();
+        $item_query = Item::query()->find($args['id']);
+        $item_query->update($args);
 
-        return $item_query;
+        return "updated";
     }
 
     public function delete($args)
     {
-        $item_query = Item::query()->where('id', '=', $args['id']);
-        if ($item_query->exists()) {
-            return $item_query->first();
-        }
+        $rules = [
+            'id' => ['required'],
+        ];
 
-        return $item_query->delete() ? true : false;
+        $this->general_validation($rules, $args);
+
+        $item_query = Item::query()->find($args['id']);
+        $item_query->delete($args);
+
+        return "deleted";
     }
 }

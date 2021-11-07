@@ -7,35 +7,44 @@ use App\Models\Brand;
 
 class BrandController extends Controller
 {
+    private function validator($args) {
+        $rules = [
+            'name' => ['required'],
+        ];
+
+        $this->general_validation($rules, $args);
+    }
+
     public function store($args)
     {
-        $item = new Brand();
-        $item->fill($args);
-        $item->save();
+        $this->validator($args);
+
+        $brand_query = Brand::query()->create($args);
 
         return "created";
     }
 
     public function update($args)
     {
-        $brand_query = Brand::query()->where('id', '=', $args['id']);
-        if ($brand_query->exists()){
-            return $brand_query->first();
-        }
+        $this->validator($args);
 
-        $brand_query->fill($args);
-        $brand_query->save();
+        $brand_query = Brand::query()->find($args['id']);
+        $brand_query->update($args);
 
-        return $brand_query;
+        return "updated";
     }
 
     public function delete($args)
     {
-        $brand_query = Brand::query()->where('id', '=', $args['id']);
-        if ($brand_query->exists()) {
-            return $brand_query->first();
-        }
+        $rules = [
+            'id' => ['required'],
+        ];
 
-        return $brand_query->delete() ? true : false;
+        $this->general_validation($rules, $args);
+
+        $brand_query = Brand::query()->find($args['id']);
+        $brand_query->delete();
+
+        return "deleted";
     }
 }

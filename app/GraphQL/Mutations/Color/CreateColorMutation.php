@@ -16,30 +16,21 @@ class CreateColorMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('Color');
+        return Type::string();
     }
 
     public function args(): array
     {
         return [
-            'name' => [
-                'name' => 'name',
-                'type' =>  Type::string(),
-            ],
-            'hex_code' => [
-                'name' => 'hex_code',
-                'type' =>  Type::string(),
+            'input' => [
+                'name' => 'input',
+                'type' => GraphQL::type('ColorInput')
             ]
         ];
     }
 
     public function resolve($root, $args)
     {
-//        $item = new Color();
-//        $item->fill($args);
-//        $item->save();
-//
-//        return $item;
-        return (new ColorController())->store($args);
+        return (new ColorController())->store($args['input']);
     }
 }

@@ -31,11 +31,6 @@ class CreateBrandMutation extends Mutation
 
     public function resolve($root, $args)
     {
-//        $item = new Brand();
-//        $item->fill($args);
-//        $item->save();
-//
-//        return $item;
         return (new BrandController())->store($args);
     }
 }

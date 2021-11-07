@@ -1,6 +1,6 @@
 <?php
 
-namespace App\graphql\Mutations\Item;
+namespace App\GraphQL\Mutations\Item;
 
 use App\Http\Controllers\ItemController;
 use App\Models\Item;
@@ -16,35 +16,21 @@ class UpdateItemMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('Item');
+        return Type::string();
     }
 
     public function args(): array
     {
         return [
-            'id' => [
-                'name' => 'id',
-                'type' =>  Type::int(),
-            ],
-            'name' => [
-                'name' => 'name',
-                'type' =>  Type::string(),
-            ],
-            'brand_id' => [
-                'name' => 'brand_id',
-                'type' =>  Type::string(),
-            ],
+            'input' => [
+                'name' => 'input',
+                'type' => GraphQL::type('ItemInput')
+            ]
         ];
     }
 
     public function resolve($root, $args)
     {
-//        $item = Item::query()->findOrFail($args['id']);
-//        $item->fill($args);
-//        $item->save();
-//
-//        return $item;
-        return (new ItemController())->update($args);
-
+        return (new ItemController())->update($args['input']);
     }
 }

@@ -13,11 +13,10 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function general_validation($rules, $values) {
-//      dd($values);
+    public function general_validation($rules, $values)
+    {
 
-        $validator = Validator::make($rules, $values);
-//        dd($validator);
+        $validator = Validator::make($values, $rules);
 
         if ($validator->fails()) {
             throw new ValidationException($validator);

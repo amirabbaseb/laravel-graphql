@@ -23,18 +23,6 @@ class CreateItemMutation extends Mutation
     public function args(): array
     {
         return [
-//            'name' => [
-//                'name' => 'name',
-//                'type' =>  Type::string(),
-//            ],
-//            'brand_id' => [
-//                'name' => 'brand_id',
-//                'type' =>  Type::string(),
-//            ],
-//            'price' => [
-//                'name' => 'price',
-//                'type' =>  Type::string(),
-//            ]
             'input' => [
                 'name' => 'input',
                 'type' => GraphQL::type('ItemInput')
@@ -44,11 +32,6 @@ class CreateItemMutation extends Mutation
 
     public function resolve($root, $args)
     {
-//        $item = new Item();
-//        $item->fill($args);
-//        $item->save();
-//
-//        return $item;
         return (new ItemController())->store($args['input'], ItemRequest::class);
     }
 }

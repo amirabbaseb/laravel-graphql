@@ -1,6 +1,6 @@
 <?php
 
-namespace App\graphql\Mutations\Brand;
+namespace App\GraphQL\Mutations\Brand;
 
 use App\Http\Controllers\BrandController;
 use App\Models\Brand;
@@ -16,7 +16,7 @@ class UpdateBrandMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('Brand');
+        return Type::string();
     }
 
     public function args(): array

@@ -17,7 +17,7 @@ class DeleteBrandMutation extends Mutation
 
     public function type(): Type
     {
-        return Type::boolean();
+        return Type::string();
     }
 
 
@@ -34,12 +34,6 @@ class DeleteBrandMutation extends Mutation
 
     public function resolve($root, $args)
     {
-//        $brand_query = Brand::query()->where('id', '=', $args['id']);
-//        if ($brand_query->exists()){
-//            return $brand_query->first();
-//        }
-//
-//        return $brand_query->delete() ? true : false;
         return (new BrandController())->delete($args);
     }
 }
