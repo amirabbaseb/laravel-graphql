@@ -139,7 +139,8 @@ return [
         'Color' => App\GraphQL\Types\ColorType::class,
         'Brand' => App\GraphQl\Types\BrandType::class,
         'ItemInput' => \App\GraphQL\Inputs\ItemInput::class,
-        'ColorInput' => \App\GraphQL\Inputs\ColorInput::class
+        'ColorInput' => \App\GraphQL\Inputs\ColorInput::class,
+        'ColorItemInput' => \App\GraphQL\Inputs\ColorItemInput::class
         // ExampleType::class,
         // ExampleRelationType::class,
         // \Rebing\GraphQL\Support\UploadType::class,
