@@ -21,6 +21,10 @@ class ColorItemInput extends InputType
                 'type' => Type::int(),
                 'description' => 'A test field',
             ],
+            'item_id' => [
+                'type' => Type::int(),
+                'description' => 'A test field',
+            ],
             'price' => [
                 'type' => Type::string(),
                 'description' => 'A test field',

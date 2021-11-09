@@ -2,7 +2,6 @@
 
 namespace App\GraphQL\Mutations\Item;
 
-use App\Http\Requests\ItemRequest;
 use App\Models\Item;
 use Rebing\GraphQL\Support\Mutation;
 use GraphQL\Type\Definition\Type;
@@ -32,6 +31,6 @@ class CreateItemMutation extends Mutation
 
     public function resolve($root, $args)
     {
-        return (new ItemController())->store($args['input'], ItemRequest::class);
+        return (new ItemController())->store($args['input']);
     }
 }

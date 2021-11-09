@@ -9,7 +9,7 @@ class BrandController extends Controller
 {
     private function validator($args) {
         $rules = [
-            'name' => ['required'],
+            'name' => ['required', 'unique:brands,name'],
         ];
 
         $this->general_validation($rules, $args);

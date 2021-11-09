@@ -10,8 +10,8 @@ class ColorController extends Controller
     private function validator($args)
     {
         $rules = [
-            'name' => ['required'],
-            'hex_code' => ['required'],
+            'name' => ['required', 'unique:colors,name'],
+            'hex_code' => ['required', 'unique:colors,hex_code'],
             'id' => ['numeric']
         ];
 
