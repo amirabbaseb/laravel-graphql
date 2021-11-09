@@ -19,6 +19,7 @@ class Controller extends BaseController
         $validator = Validator::make($values, $rules);
 
         if ($validator->fails()) {
+            dd($validator);
             throw new ValidationException($validator);
         }
     }
