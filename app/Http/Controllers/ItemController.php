@@ -13,7 +13,7 @@ class ItemController extends Controller
     {
         $rules = [
             'name' => ['required'],
-            'brand_id' => ['required']
+            'brand_id' => ['required','exists:brands,id'],
         ];
 
         $this->general_validation($rules, $args);

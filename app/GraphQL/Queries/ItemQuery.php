@@ -37,6 +37,6 @@ class ItemQuery extends Query
 
     public function resolve($root, $args)
     {
-        return Item::findOrFail($args['id']);
+        return Item::query()->find($args['id']);
     }
 }
