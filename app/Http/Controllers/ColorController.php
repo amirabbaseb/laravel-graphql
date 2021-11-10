@@ -7,20 +7,14 @@ use Illuminate\Http\Request;
 
 class ColorController extends Controller
 {
-    private function validator($args)
+    public function store($args)
     {
         $rules = [
             'name' => ['required', 'unique:colors,name'],
             'hex_code' => ['required', 'unique:colors,hex_code'],
-            'id' => ['numeric']
         ];
 
         $this->general_validation($rules, $args);
-    }
-
-    public function store($args)
-    {
-        $this->validator($args);
 
         $color_query = Color::query()->create($args);
 
@@ -29,7 +23,13 @@ class ColorController extends Controller
 
     public function update($args)
     {
-        $this->validator($args);
+        $rules = [
+            'name' => ['unique:colors,name'],
+            'hex_code' => ['unique:colors,hex_code'],
+            'id' => ['required|exits:colors,id']
+        ];
+
+        $this->general_validation($rules, $args);
 
         $color_query = Color::query()->find($args['id']);
         $color_query->update($args);
@@ -40,7 +40,7 @@ class ColorController extends Controller
     public function delete($args)
     {
         $rules = [
-            'id' => ['required'],
+            'id' => ['required|exits:colors,id']
         ];
 
         $this->general_validation($rules, $args);

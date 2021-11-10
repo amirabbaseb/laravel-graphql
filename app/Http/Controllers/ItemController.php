@@ -9,19 +9,14 @@ use App\Models\Item;
 
 class ItemController extends Controller
 {
-    private function validator($args)
+    public function store($args)
     {
         $rules = [
             'name' => ['required'],
-            'brand_id' => ['required','exists:brands,id'],
+            'brand_id' => ['required', 'exists:brands,id'],
         ];
 
         $this->general_validation($rules, $args);
-    }
-
-    public function store($args)
-    {
-        $this->validator($args);
 
         $item_query = Item::query()->create($args);
 
@@ -46,7 +41,13 @@ class ItemController extends Controller
 
     public function update($args)
     {
-        $this->validator($args);
+        $rules = [
+            'name' => ['required'],
+            'brand_id' => ['required', 'exists:brands,id'],
+            'id' => ['required|exits:items,id']
+        ];
+
+        $this->general_validation($rules, $args);
 
         $item_query = Item::query()->find($args['id']);
         $item_query->update($args);
@@ -57,7 +58,7 @@ class ItemController extends Controller
     public function delete($args)
     {
         $rules = [
-            'id' => ['required'],
+            'id' => ['required|exits:items,id']
         ];
 
         $this->general_validation($rules, $args);
